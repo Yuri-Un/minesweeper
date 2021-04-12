@@ -1,6 +1,8 @@
-import {createBoard} from './minesweeper-mod.js';
+import {initBoard, renderBoard, gameMode} from './minesweeper-mod.js';
 
-let b = createBoard(5, 5, 5);
+let b = initBoard(gameMode.EASY_MODE);
+renderBoard("minesweeper", b);
 
-console.table(b);
+console.table(b.field);
+
 console.log(Math.floor(Math.random()*100));

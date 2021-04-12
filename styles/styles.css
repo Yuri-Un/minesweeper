@@ -1,6 +1,6 @@
 :root{
-    --columns: 10;
-    --rows: 10;
+    --ms-columns: 10;
+    --ms-rows: 10;
 
     --def-font-size: 16px;
 }
@@ -14,8 +14,9 @@
 
 .minesweeper{
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-auto-rows: minmax(20px, auto);
+    grid-template-columns: repeat(var(--ms-columns), 30px);
+    grid-auto-rows: 30px;
+    /* grid-auto-columns: 20px; */
     grid-gap: 5px;
 
     border: 1px solid #333;
@@ -24,6 +25,11 @@
 }
 
 .box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background:gray;
+    color: white;
     border: 1px solid #777;
 }
