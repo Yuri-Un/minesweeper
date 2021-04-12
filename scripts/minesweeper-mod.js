@@ -69,6 +69,7 @@ function createBoard(rows, columns, mines){
     return board;
 }
 
+//needs to be improved
 export function renderBoard(id, board){
     if(id.length <= 0){
         errorLog('The board DOM id value is missing');
