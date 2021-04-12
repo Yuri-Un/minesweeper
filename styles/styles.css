@@ -1,0 +1,21 @@
+:root{
+    --columns: 10;
+    --rows: 10;
+
+    --def-font-size: 16px;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: var(--def-font-size);
+}
+
+.minesweeper{
+    display: grid;
+    grid-template-columns: repeat(1fr, 10);
+    grid-auto-rows: minmax(20px, auto);
+    grid-gap: 5px;
+
+    border: 1px solid #333;
+}
