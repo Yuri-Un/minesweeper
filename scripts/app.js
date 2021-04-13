@@ -1,6 +1,6 @@
 import {initBoard, renderBoard, gameMode} from './minesweeper-mod.js';
 
-let b = initBoard(gameMode.EASY_MODE);
+let b = initBoard(gameMode.TEST_MODE);
 renderBoard("minesweeper", b);
 
 console.table(b.field);
