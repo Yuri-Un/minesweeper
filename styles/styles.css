@@ -7,8 +7,17 @@
     --ms-min-width:300px;
     --ms-min-height: 300px;
     --ms-border-width: 1px;
+    --ms-border-radius: 0px;
     --ms-margin: 1em;
     --ms-padding: 2px;
+
+    --ms-hidden-bg: rgb(71, 92, 108);
+    --ms-hidden-bg-shadow: rgb(41, 62, 78);
+    --ms-hidden-bg-hover: rgb(91, 112, 128);
+
+    --ms-open-bg: rgb(230, 230, 230);
+    --ms-open-bg-shadow: rgb(200, 200, 200);
+
 
     --menu-roll-one: -3deg;
     --menu-roll-two: 1deg;
@@ -27,6 +36,10 @@
 }
 
 html{
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 60%, #FFCC70 100%);
+    background-attachment: fixed;
+
     font-family: Helvetica, Geneva, sans-serif;
     font-size: var(--def-font-size);
 
@@ -34,7 +47,7 @@ html{
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
     -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */    
+    -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 .blur{
@@ -73,24 +86,48 @@ html{
 }
 
 .hidden{
-    background:gray;
+    background:var(--ms-hidden-bg);
     color:white;
-    /* border: 3px solid #555; */
+    
+    border-radius:var(--ms-border-radius);
+    box-shadow: 0px 0px calc(var(--ms-cell-width)/3) var(--ms-hidden-bg-shadow) inset;
+
+    transition-property: background;
+    transition-duration: .2s;
+    transition-timing-function:ease-in;
+}
+
+.hidden:hover{
+    background-color:var(--ms-hidden-bg-hover);
+    color:transparent;
 }
 
 .flag{
-    background:yellow;
-    color:black;
+    background:var(--ms-hidden-bg) url(./images/red-flag.png);
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size: 50%;
+    color:transparent;
+
+    border-radius:var(--ms-border-radius);
 }
 
 .open{
-    background: green;
+    background: var(--ms-open-bg);
+    box-shadow: 0px 0px calc(var(--ms-cell-width)/3) var(--ms-open-bg-shadow) inset;
+
+    border-radius:var(--ms-border-radius);
 }
 
 .mine{
-    background:red;
-}
+    background:var(--ms-open-bg) url(./images/mine.png);
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size: 50%;
+    color:transparent;
 
+    border-radius:var(--ms-border-radius);
+}
 
 /*----------------------------------------------- 
                     Game menu styles 
@@ -98,9 +135,7 @@ html{
 .game-menu-wrapper{
     position: absolute;
     display: flex;
-    /* justify-content: center;
-    align-items: center; */
-
+  
     background: linear-gradient(-50deg, rgb(224, 224, 224) 30%, rgb(138, 138, 138) 60%, rgb(209, 209, 209) 80%);
     background-size: 400% 400%;
     animation: menu-bg 10s ease infinite;
