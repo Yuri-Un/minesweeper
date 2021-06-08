@@ -1768,7 +1768,7 @@ function playSound(file){
         return;
     }
 
-    if(!configFile){
+    if(!configFile.loaded){
         return;
     }
     
