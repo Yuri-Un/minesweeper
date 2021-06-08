@@ -1,8 +1,9 @@
-#Minesweeper Game Module
+# Minesweeper Game Module
+
 I started this project as a private repository just to test the ES6 modules. Finally it turned into a Minesweeper minigame module. ES6 modules are a safe way to add new functionality to any project, because the module scope remains isolated from the core code. The main project idea is to make it cross platform and well supported on any screen modes (portrait or album) and resolutions.
 
 
-##Initialization
+## Initialization
 
 Minesweeper module components can be imported to any Web project via ES6 import operator:
 
@@ -49,7 +50,7 @@ Where `gameMode.EASY_MODE` initializes a params object (easy game mode) for a ne
 
 where `path` is the relative path to the root game module folder (from project root directory). Without the respective configuration file, the module will also work.
 
-##Game Modes
+## Game Modes
 
 There are 5 available game modes, which are constant properties of `gameMode` object:
 1. Easy game mode: `gameMode.EASY_MODE`. 
@@ -78,7 +79,7 @@ const board = new Board("ms-game", gameMode.CUSTOM_MODE);
 
 The above `gameMode.CUSTOM_MODE` will contain the respective 'default' parameters. Otherwise, the game settings can be tuned via in game Settings menu (after enabling cookies on the page). If cookies should be disabled on the page by any reasons, the pre-defined settings is a way to set game settigns without in game Settings menu.
 
-##Game Events
+## Game Events
 
 The board object is the publisher of the custom game events. These events can be used by 3rd party developers to update UI. There are 3 different in game custom events:
 1. *Flag Event*. Is triggered every time when the flag counter is changed in game.
@@ -116,7 +117,7 @@ function updateTimerHandler(e){
 }
 ```
 
-##Audio Files
+## Audio Files
 
 Audio files are stored in a `Map(key, {file: 'file-path'})` data structure. Supported keys are: 'click', 'open-cell' and 'drop-flag'. To change the default sound effects use this code:
 
@@ -127,7 +128,7 @@ audioFiles.delete('click');
 audioFiles.set('click', {file: 'path/to/your/sounds.mp3'});
 ```
 
-##Default Colors
+## Default Colors
 
 Default colors are stored in a `Map(key, {r: xxx, g: yyy, b: zzz})` data structure. To change the default colors use this code before the board initialization (`new Board()`):
 
@@ -151,7 +152,7 @@ gameMode.updateMode();
 const board = new Board("ms-game", gameMode.EASY_MODE);
 ```
 
-##Cookies
+## Cookies
 
 User defined settings are stored in the browser's domain `localStorage` (marked as cookies). It's important to inform users that this page is using cookies. To enable this functionality, cookies should be enabled via internal game options (Main Menu -> About -> Cookies) or via external object property (3rd party UI):
 
@@ -165,12 +166,12 @@ To disable cookies:
 board.cookies.disableCookies();
 ```
 
-##Todo
+## Todo
 * Bug fixes
 * Mobile device support
 * Localization
 
-#License & Copyright
+# License & Copyright
 
 [MIT License](LICENSE)
 
