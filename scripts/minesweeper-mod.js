@@ -1,9 +1,15 @@
 /****************************************************************
 *                  Minesweeper Videogame Module                 *
 *                                                               *
-*  Author: Yuri Un                                              *
 *  Date: April 2021                                             *
 *****************************************************************/
+
+const appInfo = {
+    version: '1.02',
+    author: 'Yuri Un',
+    type: 'module',
+    localization: 'en'
+}
 
 //==============================================================
 //                      USER DEFINED TYPES
@@ -39,7 +45,6 @@ export class Board{
         this.openCells = 0; //the counter for opened cells from total (rows*columns)
         this.flags = 0; //flag markers
         this.field = []; //board cell matrix
-        //this.enabledCookies = false;
         this.gameStarted = false;
         this.gameOver = false; //lose status
         this.gamePaused = false; 
@@ -47,7 +52,7 @@ export class Board{
 
         //class composition properties
         this.timer = new Timer();
-        this.cookies = new CookiesManager();
+        this.storage = new StorageManager();
 
         //class custom defined events
         this.flagEvent = new CustomEvent('ms-flags', {
@@ -400,46 +405,48 @@ class Timer{
 }
 
 //Supports in game cookie files (local storage) management. The Board class property.
-class CookiesManager{
+class StorageManager{
     constructor(){
-        if(this.isSavedCookies()){
-            this.loadCookies();
+        if(this.isSavedStorage()){
+            this.loadStorage();
         }
         else{
-            this.enabledCookies = false;
+            this.enableStorage();
         }
     }
 
-    isSavedCookies(){
-        const data = localStorage.getItem('ms-game-cookies');
+    isSavedStorage(){
+        const data = localStorage.getItem('ms-game-storage');
         if(data === null) return false;
 
         return true;
     }
 
-    enableCookies(){
-        this.enabledCookies = true;
+    enableStorage(){
+        this.enabledStorage = true;
 
         const data = JSON.stringify(this);
-        localStorage.setItem('ms-game-cookies', data);
+        localStorage.setItem('ms-game-storage', data);
     }
 
-    disableCookies(){
-        this.enabledCookies = false;
-        this.clearCookies();
+    disableStorage(){
+        this.enabledStorage = false;
+
+        const data = JSON.stringify(this);
+        localStorage.setItem('ms-game-storage', data);
     }
 
-    loadCookies(){
-        const data = JSON.parse(localStorage.getItem('ms-game-cookies'));
-        this.enabledCookies = data.enabledCookies;
+    loadStorage(){
+        const data = JSON.parse(localStorage.getItem('ms-game-storage'));
+        this.enabledStorage = data.enabledStorage;
     }
 
-    clearCookies(){
-        if(!this.isSavedCookies()){
+    clearStorage(){
+        if(!this.isSavedStorage()){
             return;
         }
 
-        localStorage.removeItem('ms-game-cookies');
+        localStorage.removeItem('ms-game-storage');
     }
 }
 
@@ -1289,14 +1296,9 @@ function mainMenu(){
     let gameAboutMenuLabelVersion = document.createElement('h3');
     gameAboutMenuLabelVersion.innerText = "Minesweeper";
     let gameAboutMenuTxtVersion = document.createElement('p');
-    gameAboutMenuTxtVersion.innerText = "Version: 1.01";
-
-    let gameAboutMenuLabelRules = document.createElement('h3');
-    gameAboutMenuLabelRules.innerText = "The rules of the game";
-    let gameAboutMenuTxtRules = document.createElement('p');
-    gameAboutMenuTxtRules.innerText = "Win condition - mark all mines correctly or open all none mined cells";
-
-    //Lose condition - when opening a mined cell or when all available flags not mark all mines.
+    gameAboutMenuTxtVersion.innerText = 'Version: ' + appInfo.version;
+    let gameAboutMenuTxtAuthor = document.createElement('p');
+    gameAboutMenuTxtAuthor.innerText = 'Author: ' + appInfo.author;
     
     let gameAboutMenuLabelControls = document.createElement('h3');
     gameAboutMenuLabelControls.innerText = "Controls";
@@ -1324,14 +1326,14 @@ function mainMenu(){
     gameAboutMenuContainer.className = "menu-container";
 
     let gameAboutMenuCookiesTitle = document.createElement('h3');
-    gameAboutMenuCookiesTitle.innerText = "Cookies";
+    gameAboutMenuCookiesTitle.innerText = "Local storage";
 
     let gameAboutMenuCookies = document.createElement('input');
     gameAboutMenuCookies.setAttribute('type', 'checkbox');
-    gameAboutMenuCookies.setAttribute('name', 'cookies');
-    gameAboutMenuCookies.setAttribute('id', 'cookies');
-    gameAboutMenuCookies.checked = board.cookies.enabledCookies;
-    gameAboutMenuCookies.addEventListener('click', cookiesSettingsMenuHandler, false);
+    gameAboutMenuCookies.setAttribute('name', 'storage');
+    gameAboutMenuCookies.setAttribute('id', 'storage');
+    gameAboutMenuCookies.checked = board.storage.enabledStorage;
+    gameAboutMenuCookies.addEventListener('click', storageSettingsMenuHandler, false);
 
     let gameAboutMenuCancel = document.createElement('div');
     gameAboutMenuCancel.className = "menu-option exit-about";
@@ -1483,8 +1485,7 @@ function mainMenu(){
     gameAboutMenuContainer.appendChild(gameAboutMenuTitle);
     gameAboutMenuContainer.appendChild(gameAboutMenuLabelVersion);
     gameAboutMenuContainer.appendChild(gameAboutMenuTxtVersion);
-    gameAboutMenuContainer.appendChild(gameAboutMenuLabelRules);
-    gameAboutMenuContainer.appendChild(gameAboutMenuTxtRules);
+    gameAboutMenuContainer.appendChild(gameAboutMenuTxtAuthor);
     gameAboutMenuContainer.appendChild(gameAboutMenuLabelControls);
     gameAboutMenuContainer.appendChild(gameAboutMenuTxtControls);
     gameAboutMenuContainer.appendChild(gameAboutMenuLabelResources);
@@ -1553,7 +1554,7 @@ function bindMenuSoundHandlers(classSelector){
 function updateMainMenuPane(){
     const settingsBtn = document.querySelector('.game-settings');
     
-    if(!board.cookies.isSavedCookies()){
+    if(!board.storage.isSavedStorage() || !board.storage.enabledStorage){
         settingsBtn.classList.add('disabled');
     }
     else{
@@ -1895,12 +1896,12 @@ function openAboutMenuHandler(e){
     openAboutMenu();
 }
 
-function cookiesSettingsMenuHandler(e){
+function storageSettingsMenuHandler(e){
     if(e.target.checked){
-        board.cookies.enableCookies();
+        board.storage.enableStorage();
     }
     else{
-        board.cookies.disableCookies();
+        board.storage.disableStorage();
         setDefaultSettings();
     }
 

@@ -7,3 +7,7 @@
 
 # Local History for Visual Studio Code
 .history/
+
+#Local Files
+index.html
+/scripts/app.js

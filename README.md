@@ -2,6 +2,15 @@
 
 I started this project as a private repository just to test the ES6 modules. Finally it turned into a Minesweeper minigame module. ES6 modules are a safe way to add new functionality to any project, because the module scope remains isolated from the core code. The main project idea is to make it cross platform and well supported on any screen modes (portrait or album) and resolutions.
 
+## Contents
+* Initialization
+* Game Modes
+* Game Events
+* Audio Files
+* Default Colors
+* Local Storage
+* Todo
+* License & Copyright
 
 ## Initialization
 
@@ -152,19 +161,21 @@ gameMode.updateMode();
 const board = new Board("ms-game", gameMode.EASY_MODE);
 ```
 
-## Cookies
+## Local Storage
 
-User defined settings are stored in the browser's domain `localStorage` (marked as cookies). It's important to inform users that this page is using cookies. To enable this functionality, cookies should be enabled via internal game options (Main Menu -> About -> Cookies) or via external object property (3rd party UI):
-
-```javascript
-board.cookies.enableCookies();
-```
-
-To disable cookies:
+User defined app settings are stored in the browser's domain `localStorage`. This module doesn't save any user data like tokens, IP etc. The module stores only app configuration data and only on local machine. The feature is enabled by default. To disable this functionality, `storage` should be disabled via internal game options (Main Menu -> About -> Local Storage) or via external object property (3rd party UI):
 
 ```javascript
-board.cookies.disableCookies();
+board.storage.enableStorage();
 ```
+
+To disable storage:
+
+```javascript
+board.storage.disableStorage();
+```
+
+*Note*. If the module code is modified in a way which collects some user data and sends it to the server, it's important to inform users that this page is using cookies. The 'cookies' can be disabled by disabling the Local Storage. Learn more about it on [CookieLaw](https://www.cookielaw.org/) site.
 
 ## Todo
 * Bug fixes
