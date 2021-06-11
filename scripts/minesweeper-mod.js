@@ -1,11 +1,12 @@
 /****************************************************************
 *                  Minesweeper Videogame Module                 *
 *                                                               *
-*  Date: April 2021                                             *
+*  Copyright (c) 2021 Yuri Un                                   *
 *****************************************************************/
 
 const appInfo = {
     version: '1.02',
+    license: 'GPLv2',
     author: 'Yuri Un',
     type: 'module',
     localization: 'en'

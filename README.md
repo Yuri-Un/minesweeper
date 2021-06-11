@@ -10,6 +10,7 @@ I started this project as a private repository just to test the ES6 modules. Fin
 * Default Colors
 * Local Storage
 * Todo
+* Version History
 * License & Copyright
 
 ## Initialization
@@ -182,9 +183,23 @@ board.storage.disableStorage();
 * Mobile device support
 * Localization
 
+## Version History
+
+### 1.03 (2021-06-11)
+    Minor changes:
+    * License info update
+
+### 1.02 (2021-06-09)
+    Minor changes:
+    * Security improvements
+    * localStorage support
+
+### 1.01 (2021-06-08)
+    * First beta
+
 # License & Copyright
 
-[MIT License](LICENSE)
+[GPLv2](LICENSE)
 
 Copyright (c) 2021 Yuri Un
 
