@@ -5,7 +5,7 @@
 *****************************************************************/
 
 const appInfo = {
-    version: '1.02',
+    version: '1.03',
     license: 'GPLv2',
     author: 'Yuri Un',
     type: 'module',
@@ -523,15 +523,24 @@ class ConfigFile{
 
     async getRelPath(){
         let result = '.';
+        const configURL = location.origin + '/minesweeper-config.json';
 
-        await fetch(location.origin + '/minesweeper-config.json')
-        .then(response => response.json())
+        await fetch(configURL)
+        .then(response => {
+
+            if(response.ok){
+                response.json();
+            }
+            else{
+                throw ({'msg': response.status});
+            }
+        })
         .then(data => {
             result = data.path; 
             this.loaded = true;
         })
         .catch(error => {
-            warningLog('Configuration file not found! The module sound effects may be disabled! \nCheck the README documentation at https://github.com/Yuri-Un/minesweeper \n');
+            warningLog('Configuration file not found (' + error.msg + ')! The module sound effects may be disabled! \nCheck the README documentation at https://github.com/Yuri-Un/minesweeper \n');
         });
 
         return result;
@@ -670,6 +679,11 @@ function createBoard(rows, columns, mines){
 
 //Set mines on the board one by one recursively
 function setMines(board, mines){
+    if(mines <= 0){
+        warningLog('The mines counter is incorrect');
+        return;
+    }
+
     let minesLeft = mines;
     const maxMinesPerRow = Math.round(board.columns/7);
     let minesPerRowCounter = 0;

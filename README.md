@@ -10,7 +10,6 @@ I started this project as a private repository just to test the ES6 modules. Fin
 * Default Colors
 * Local Storage
 * Todo
-* Version History
 * License & Copyright
 
 ## Initialization
@@ -38,6 +37,9 @@ The game object should be anchored to a block HTML tag. But the best way to do t
 
 ```html
 //[index.html] file
+<head>
+    <link rel="stylesheet" href="./path-to/styles/mod-styles.css">
+</head>
 <body>
     <div id="ms-game" class="minesweeper"></div>
 
@@ -45,7 +47,7 @@ The game object should be anchored to a block HTML tag. But the best way to do t
 </body>
 ```
 
-**Note**. Game container must have a `"minesweeper"` class.
+**Note**. Game container must have a `"minesweeper"` class and the document `<head>` tag must contain the `link` element to the module styles.
 
 Where `gameMode.EASY_MODE` initializes a params object (easy game mode) for a new game object (board), `"ms-game"` is an external DOM id block. The `newGame(board)` function initializes game styles and renders the game object. The board object represents the abstract game model, which can be started as `newGame(board)`, `nextGame(board)` and `restartGame(board)`. Where:
 1. `newGame(board)` - creates a new game with some random parameters.
@@ -182,20 +184,6 @@ board.storage.disableStorage();
 * Bug fixes
 * Mobile device support
 * Localization
-
-## Version History
-
-### 1.03 (2021-06-11)
-    Minor changes:
-    * License info update
-
-### 1.02 (2021-06-09)
-    Minor changes:
-    * Security improvements
-    * localStorage support
-
-### 1.01 (2021-06-08)
-    * First beta
 
 # License & Copyright
 
