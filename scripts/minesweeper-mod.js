@@ -5,7 +5,7 @@
 *****************************************************************/
 
 const appInfo = {
-    version: '1.03',
+    version: '1.04',
     license: 'GPLv2',
     author: 'Yuri Un',
     type: 'module',

@@ -2,10 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.03 (2021-06-11)
+## 1.04 (2021-06-14)
     Added:
     * CHANGELOG.md file added
 
+    Minor changes:
+    * Documentation update
+## 1.03 (2021-06-11)
     Minor changes:
     * License info update
 
