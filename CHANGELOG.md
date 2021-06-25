@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.05 (2021-06-24)
+## 1.5 (2021-06-24)
     Added:
     - Public `export` functions: pauseGame(), restoreGame() and getBoard()
 
@@ -18,20 +18,20 @@ All notable changes to this project will be documented in this file.
     - User defined difficulty for different board sizes
     - Few more bugs referred to board size after dynamic resizing
 
-## 1.04 (2021-06-14)
+## 1.4 (2021-06-14)
     Added:
     - CHANGELOG.md file added
 
     Minor changes:
     - Documentation update
-## 1.03 (2021-06-11)
+## 1.3 (2021-06-11)
     Minor changes:
     - License info update
 
-## 1.02 (2021-06-09)
+## 1.2 (2021-06-09)
     Minor changes:
     - Security improvements
     - localStorage support
 
-## 1.01 (2021-06-08)
+## 1.1 (2021-06-08)
     - First beta
