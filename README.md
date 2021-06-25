@@ -14,7 +14,7 @@ I started this project as a private repository just to test the ES6 modules. Fin
 
 ## Initialization
 
-Firstly, clone the repository to a local directory:
+Firstly, clone the repository to a local project directory:
 
 ```
 $ git clone https://github.com/Yuri-Un/minesweeper.git
