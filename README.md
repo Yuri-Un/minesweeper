@@ -1,6 +1,6 @@
 # Minesweeper Game Module
 
-I started this project as a private repository just to test the ES6 modules. Finally it turned into a Minesweeper minigame module. ES6 modules are a safe way to add new functionality to any project, because the module scope remains isolated from the core code. The main project idea is to make it cross platform and well supported on any screen modes (portrait or album) and resolutions.
+I started this project as a private repository just to test the ES6 modules. Finally it turned into a Minesweeper minigame module. ES6 modules are a safe way to add new functionality to any project, because the module scope remains isolated from the core code. The main project idea is to make it cross platform and well supported on any screen modes (portrait or album) and resolutions. While the game mechanic is relatively simple, it contains a decent amount of supportive code to make it flexible and configurable in 3rd party apps.
 
 ## Contents
 * Initialization
@@ -14,7 +14,20 @@ I started this project as a private repository just to test the ES6 modules. Fin
 
 ## Initialization
 
-Minesweeper module components can be imported to any Web project via ES6 import operator:
+Firstly, clone the repository to a local directory:
+
+```
+$ git clone https://github.com/Yuri-Un/minesweeper.git
+```
+**Important**. The module can be cloned to any local project directory like `modules` or `lib`. The `minesweeper-config.json` file should be created in the project root directory, like:
+
+```json
+{"path" : "./modules"} or {"path": "./lib"} 
+```
+
+where `path` is the relative path to the root game module folder (from project root directory). Without the respective configuration file, some module functions will not work.
+
+Minesweeper module entities can be imported to any Web project via ES6 import operator:
 
 ```javascript
 import {Board, gameMode, newGame} from './path-to/minesweeper-mod.js';
@@ -22,7 +35,7 @@ import {Board, gameMode, newGame} from './path-to/minesweeper-mod.js';
 
 where './path-to' is a relative path to the module file from the respective .js file.
 
-There are next available in game entities (classes, objects, data structures, variables) for importing: `Board`, `gameMode`, `newGame`, `nextGame`, `restartGame`, `audioFiles`, `colorFiles`. All are explained in the below sections.
+There are next available in game entities (classes, objects, data structures, variables) for importing: `Board`, `gameMode`, `newGame`, `nextGame`, `restartGame`, `pauseGame`, `restoreGame`, `getBoard`, `audioFiles`, `colorFiles`. All of them are explained in the below sections.
 
 At least 3 module entities should be imported to initialize a default game: `Board`, `gameMode` and `newGame`. For example,
 
@@ -47,20 +60,15 @@ The game object should be anchored to a block HTML tag. But the best way to do t
 </body>
 ```
 
-**Note**. Game container must have a `"minesweeper"` class and the document `<head>` tag must contain the `link` element to the module styles.
+**Note**. The game container must have a `"minesweeper"` class and the document `<head>` tag must contain the `link` element to the module styles.
 
-Where `gameMode.EASY_MODE` initializes a params object (easy game mode) for a new game object (board), `"ms-game"` is an external DOM id block. The `newGame(board)` function initializes game styles and renders the game object. The board object represents the abstract game model, which can be started as `newGame(board)`, `nextGame(board)` and `restartGame(board)`. Where:
+Where `gameMode.EASY_MODE` initializes a params object (easy game mode) for a new game object (board), `"ms-game"` is an external DOM id block. The `newGame(board)` function initializes game styles and renders the game object. The board object represents the abstract game model, which can be started as `newGame(board)`, `nextGame()` and `restartGame()`. Where:
 1. `newGame(board)` - creates a new game with some random parameters.
-2. `restartGame(board)` - restarts the game with the same parameters.
-3. `nextGame(board)` - restarts the game with increased difficulty.
-
-**Important**. The module can be cloned to any local project directory like `modules` or `lib`. The `minesweeper-config.json` file should be created in the project root directory, to enable all module functionality, like:
-
-```json
-{"path" : "./module"} or {"path": "./lib"} 
-```
-
-where `path` is the relative path to the root game module folder (from project root directory). Without the respective configuration file, the module will also work.
+2. `restartGame()` - restarts the game with the same parameters.
+3. `nextGame()` - restarts the game with increased difficulty.
+4. `pauseGame()` - pauses the game.
+5. `restoreGame()` - restarts the game.
+6. `getBoard()` - gets the internal module board object. A way to import/export game data between 'apps'.
 
 ## Game Modes
 
@@ -73,7 +81,7 @@ There are 5 available game modes, which are constant properties of `gameMode` ob
 
 The properties can be refreshed by next methods respectively: `getEasyMode()`, `getNormalMode()`, `getHardMode()`, `getCustomMode(gameSettings)`, `getRandomMode()`.
 
-The custom game mode sholud be initialized with the game settings parameters:
+The custom game mode must be initialized with the game settings parameters:
 
 ```javascript
 //default settings
