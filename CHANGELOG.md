@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.6 (2021-06-29)
+    Fixed:
+    - Configuration file detection in subdomains
+    
 ## 1.5 (2021-06-24)
     Added:
     - Public `export` functions: pauseGame(), restoreGame() and getBoard()
