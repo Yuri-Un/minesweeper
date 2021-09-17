@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.7 (2021-09-17)
+    Minor changes:
+    - Refactoring some functions
+    
 ## 1.6 (2021-06-29)
     Fixed:
     - Configuration file detection in subdomains
